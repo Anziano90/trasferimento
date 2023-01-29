@@ -31,7 +31,7 @@ public class StudenteController {
     }
 
     @GetMapping
-    public ResponseEntity getStudenteById(){
+    public ResponseEntity getAllStudenti(){
         List<StudentiEntity> listaStudenti = studenteService.getAll();
         try {
             if(listaStudenti == null || listaStudenti.isEmpty()){
