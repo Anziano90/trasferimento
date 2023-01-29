@@ -58,5 +58,6 @@ public class AmministratoriEntity {
     @Version
     @Column(name = "version")
     private int version;
-
+    @OneToMany(mappedBy = "amministratore", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PianoDiStudioEntity> listaPianoDiStudio = new ArrayList<>();
 }
