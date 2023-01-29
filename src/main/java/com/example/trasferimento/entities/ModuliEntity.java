@@ -43,4 +43,7 @@ public class ModuliEntity {
     @Column(name = "version")
     private int version;
 
+    @OneToMany(mappedBy = "moduli", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EsamiDaConvalidareEntity> listaEsami_da_convalidare = new ArrayList<>();
+
 }

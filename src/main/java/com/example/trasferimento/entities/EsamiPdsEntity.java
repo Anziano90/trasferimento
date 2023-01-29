@@ -45,4 +45,8 @@ public class EsamiPdsEntity {
     @Column(name = "version")
     private int version;
 
+    @OneToMany(mappedBy = "esami_pds", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EsamiEntity> listaEsami = new ArrayList<>();
+
+
 }

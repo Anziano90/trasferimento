@@ -52,5 +52,9 @@ public class EsamiEntity {
     @Column(name = "version")
     private int version;
 
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_pds")
+    private PianoDiStudiEntity piano_di_studi;
 
 }

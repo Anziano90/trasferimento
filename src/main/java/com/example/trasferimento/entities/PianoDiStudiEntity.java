@@ -41,5 +41,12 @@ public class PianoDiStudiEntity {
     @Column(name = "version")
     private int version;
 
+    @OneToMany(mappedBy = "pds", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EsamiPdsEntity> listaEsamiPds = new ArrayList<>();
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_amministratore")
+    private AmministratoriEntity amministratore;
 
 }
