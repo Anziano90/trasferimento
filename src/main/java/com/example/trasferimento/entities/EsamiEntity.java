@@ -1,5 +1,6 @@
 package com.example.trasferimento.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,10 +53,8 @@ public class EsamiEntity {
     @Version
     @Column(name = "version")
     private int version;
-
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_pds")
-    private PianoDiStudiEntity piano_di_studi;
+    @OneToMany(mappedBy = "esame")
+    @JsonBackReference
+    private List<EsamiPdsEntity> listaEsamiInseritiInPianoDiStudi;
 
 }

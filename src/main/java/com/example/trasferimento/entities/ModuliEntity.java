@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,13 +25,9 @@ public class ModuliEntity {
     @Basic
     @Column(name = "descrizione")
     private String descrizione;
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_studente")
-    private StudentiEntity studente;
     @Basic
     @Column(name = "convalidato")
-    private Byte convalidato;
+    private boolean convalidato;
     @Basic
     @CreationTimestamp
     @Column(name = "creation_date")
@@ -42,8 +40,11 @@ public class ModuliEntity {
     @Version
     @Column(name = "version")
     private int version;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_studente")
+    private StudentiEntity studente;
 
-    @OneToMany(mappedBy = "moduli", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EsamiDaConvalidareEntity> listaEsami_da_convalidare = new ArrayList<>();
+    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EsamiDaConvalidareEntity> listaEsamiDaConvalidare = new ArrayList<>();
 
 }

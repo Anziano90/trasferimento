@@ -1,5 +1,6 @@
 package com.example.trasferimento.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,14 +22,15 @@ public class EsamiPdsEntity {
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    @Basic
-    @Column(name = "id_esame")
-    private long idEsame;
-    @Basic
-    @Column(name = "id_pds")
-    private long idPds;
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "id_esame")
+    private EsamiEntity esame;
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "id_pds")
+    private PianoDiStudiEntity pianoDiStudi;
     @Basic
     @Column(name = "descrizione")
     private String descrizione;
@@ -45,8 +47,8 @@ public class EsamiPdsEntity {
     @Column(name = "version")
     private int version;
 
-    @OneToMany(mappedBy = "esami_pds", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EsamiEntity> listaEsami = new ArrayList<>();
+
+
 
 
 }

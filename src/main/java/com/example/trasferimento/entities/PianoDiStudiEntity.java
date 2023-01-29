@@ -1,11 +1,15 @@
 package com.example.trasferimento.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,12 +26,9 @@ public class PianoDiStudiEntity {
     @Basic
     @Column(name = "descrizione")
     private String descrizione;
-    @Basic
-    @Column(name = "id_studente")
-    private Long idStudente;
-    @Basic
-    @Column(name = "id_amministratore")
-    private Long idAmministratore;
+    @OneToOne
+    @JoinColumn(name = "id_studente")
+    private StudentiEntity studente;
     @Basic
     @CreationTimestamp
     @Column(name = "creation_date")
@@ -40,11 +41,9 @@ public class PianoDiStudiEntity {
     @Version
     @Column(name = "version")
     private int version;
-
-    @OneToMany(mappedBy = "pds", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EsamiPdsEntity> listaEsamiPds = new ArrayList<>();
-
-    @ToString.Exclude
+    @OneToMany(mappedBy = "pianoDiStudi")
+    @JsonBackReference
+    private List<EsamiPdsEntity> listaEsamiInseritiInPianoDiStudi = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_amministratore")
     private AmministratoriEntity amministratore;

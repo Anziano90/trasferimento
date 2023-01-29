@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 @ToString
 @Entity
-@Table(name = "amministratori", schema = "trasferimento", catalog = "")
+@Table(name = "amministratori", schema = "trasferimento")
 public class AmministratoriEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,5 +61,5 @@ public class AmministratoriEntity {
     @Column(name = "version")
     private int version;
     @OneToMany(mappedBy = "amministratore", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PianoDiStudioEntity> listaPianoDiStudio = new ArrayList<>();
+    private List<PianoDiStudiEntity> listaPianiDiStudio = new ArrayList<>();
 }

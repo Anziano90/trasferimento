@@ -54,8 +54,6 @@ public class EsamiDaConvalidareEntity {
     @Version
     @Column(name = "version")
     private int version;
-
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_modulo")
     private ModuliEntity modulo;
